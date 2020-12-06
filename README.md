@@ -6,14 +6,14 @@ Uses:
 - Apache Maven 3.6.3
 - Springboot 2.4.0
 - Spring Data JPA for entity management (Repository)
-- Automatically creates database
-- In-memory H2 relational database persisting to file
-- Separate In-memory H2 database not persistent for testing purposes
-- Separate prod profile with no automatic creation of database
+- Runs on port 8085
 
 ##### How to run
 1. Git clone from 
-2. From root directory, run mvn springboot:run
+2. To run tests, type mvn test from command line
+3. To run app, type mvn springboot:run from command line. **Make sure you don't have other app running on port 8085**
+4. Manually test app with Swagger 2 (http://localhost:8085/swagger-ui/)
+5. In the root directory a Postman JSON export can be found with the necessary Requests configured. 
 
 ##### API:
 

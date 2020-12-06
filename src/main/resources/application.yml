@@ -1,11 +1,13 @@
+server:
+  port: 8085
 spring:
-    datasource:
-      url: jdbc:h2:file:./data/productcrud
-      driverClassName: org.h2.Driver
-      username: user
-      password: changeme
-    jpa:
-      database-platform: org.hibernate.dialect.H2Dialect
-      hibernate:
-        show-sql: true
-        ddl-auto: update
+  datasource:
+    url: jdbc:h2:file:./data/productcrud
+    driverClassName: org.h2.Driver
+    username: user
+    password: changeme
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      show-sql: true
+      ddl-auto: update
