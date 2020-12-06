@@ -1,0 +1,3 @@
+spring:
+    jpa:
+        ddl-auto: none
