@@ -21,15 +21,19 @@ Uses:
 - GET /api/products - Retrieves all products
 - PUT /api/product - Updates a product
 - DELETE /api/product/{product_id} - Deletes a product
+- POST /api/order - Place an order
+- GET /api/order/findByDatesRange/{startDate}/{endDate}
+- GET /api/order/amount/{orderId}
 
 ##### Model:
 Product:
 - id - int - auto
 - name - String
 - price - double
-- create_date - datetime
+- create_date - LocalDateTime
 - is_valid - boolean
 
 Order:
 - id - int - auto
-- create_date - datetime
+- email - String
+- create_date - LocalDateTime

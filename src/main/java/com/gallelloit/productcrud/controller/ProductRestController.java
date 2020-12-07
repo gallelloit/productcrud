@@ -14,18 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class ProductRestController {
 
     @Autowired
     ProductService productService;
 
-    @PostMapping(path="/product", consumes = "application/json")
+    @PostMapping("/product")
     public ResponseEntity insertProduct(@RequestBody Product product){
 
         product.setProductId(0);
         product.setIsActive(true);
-        product.setCreateDate(LocalDateTime.now());
+
+        if (product.getCreateDate() == null) {
+            product.setCreateDate(LocalDateTime.now());
+        }
 
         try{
             productService.save(product);

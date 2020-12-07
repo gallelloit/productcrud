@@ -20,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/product",
+					"raw": "http://localhost:8085/api/product",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"api",
 						"product"
@@ -36,17 +36,17 @@
 			"response": []
 		},
 		{
-			"name": "Get all products",
+			"name": "Delete product",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/product/130",
+					"raw": "http://localhost:8085/api/product/130",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"api",
 						"product",
@@ -63,12 +63,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/product",
+					"raw": "http://localhost:8085/api/product",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"api",
 						"product"
@@ -84,7 +84,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Notbook\",\r\n    \"price\": 4.20\r\n}",
+					"raw": "{\r\n    \"name\": \"Notebook\",\r\n    \"price\": 4.20\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -92,17 +92,91 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/product",
+					"raw": "http://localhost:8085/api/product",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"api",
 						"product"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place an order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createDate\": \"2020-12-06T23:30:34.499Z\",\r\n  \"email\": \"yetother@cloud.com\",\r\n  \"orderId\": 0,\r\n  \"products\": [\r\n    {\r\n      \"createDate\": \"2020-12-06T23:30:34.499Z\",\r\n      \"name\": \"Pencil\",\r\n      \"isActive\": true,\r\n      \"price\": 2,\r\n      \"productId\": 0\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"order"
+					]
+				},
+				"description": "Places a new order. Products must exist previously."
+			},
+			"response": []
+		},
+		{
+			"name": "Find orders by dates range",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/order/findByDatesRange?startDate=2020-12-06T12:00:00&endDate=2020-12-07T12:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"order",
+						"findByDatesRange"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-12-06T12:00:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-12-07T12:00:00"
+						}
+					]
+				},
+				"description": "Find orders by a range of two dates (startDate and endDate)"
+			},
+			"response": []
+		},
+		{
+			"name": "Calculate total amount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Given an order, calculates the total sum of all products"
 			},
 			"response": []
 		}

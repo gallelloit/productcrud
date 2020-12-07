@@ -8,6 +8,8 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -36,12 +38,30 @@ public class Product {
     @Column(name="is_active", nullable = false)
     private Boolean isActive;
 
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name="products_orders",
+//            joinColumns=@JoinColumn(name="product_id"),
+//            inverseJoinColumns=@JoinColumn(name="order_id")
+//    )
+//    private List<Order> orders;
+
     public Product(String name, double price, LocalDateTime createDate, boolean active) {
         this.name = name;
         this.price = price;
         this.createDate = createDate;
         this.isActive = active;
+        //this.orders = new ArrayList<>();
     }
+//
+//    public Product(int productId, String name, double price, LocalDateTime createDate, Boolean isActive) {
+//        this.productId = productId;
+//        this.name = name;
+//        this.price = price;
+//        this.createDate = createDate;
+//        this.isActive = isActive;
+//        //this.orders = new ArrayList<>();
+//    }
 
     @Override
     public boolean equals(Object o) {
