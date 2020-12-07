@@ -12,8 +12,9 @@ Uses:
 1. Git clone from 
 2. To run tests, type mvn test from command line
 3. To run app, type mvn springboot:run from command line. **Make sure you don't have other app running on port 8085**
-4. Manually test app with Swagger 2 (http://localhost:8085/swagger-ui/)
-5. In the root directory a Postman JSON export can be found with the necessary Requests configured. 
+4. Manually test app with Swagger 2 (http://localhost:8085/api/swagger-ui/)
+5. With the app running, you can open H2 Console (http://localhost:8085/api/h2-console))
+6. In the root directory a Postman JSON export can be found with the necessary Requests configured. 
 
 ##### API:
 
