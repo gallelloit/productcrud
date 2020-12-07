@@ -8,6 +8,11 @@ Uses:
 - Spring Data JPA for entity management (Repository)
 - Runs on port 8085
 
+##### TODOs
+- Customize error handling
+- Dates format validation
+- Enhancing order placing. Only working with direct persisting so far. Necesary to link existing products to new orders.
+
 ##### How to run
 1. Git clone from 
 2. To run tests, type mvn test from command line
@@ -15,6 +20,12 @@ Uses:
 4. Manually test app with Swagger 2 (http://localhost:8085/api/swagger-ui/)
 5. With the app running, you can open H2 Console (http://localhost:8085/api/h2-console))
 6. In the root directory a Postman JSON export can be found with the necessary Requests configured. 
+
+##### Database:
+- DDL auto-generated
+- In-memory H2 Database persisted to File
+- Separate In-memory H2 Database for testing purposes
+- Prod profile des not generates the DDL (would be necesary to manually mantain a phisical DB model)
 
 ##### API:
 
