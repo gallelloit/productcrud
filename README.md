@@ -49,3 +49,4 @@ Order:
 - id - int - auto
 - email - String
 - create_date - LocalDateTime
+- products - List of Product
