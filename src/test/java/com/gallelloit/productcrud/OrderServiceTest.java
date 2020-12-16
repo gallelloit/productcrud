@@ -5,10 +5,7 @@ import com.gallelloit.productcrud.model.Product;
 import com.gallelloit.productcrud.service.OrderService;
 import com.gallelloit.productcrud.service.ProductService;
 import javassist.NotFoundException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -17,8 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -42,7 +38,7 @@ public class OrderServiceTest {
     List<Product> products;
 
     @Test
-    void placeSimplestOrder_thenOrderExists() throws Exception {
+    void placeOrderWithNewProduct_thenOrderExists() throws Exception {
 
         long orderCount = orderService.count();
 
@@ -63,6 +59,62 @@ public class OrderServiceTest {
         assertEquals(email, fetchOrder.getEmail());
 
     }
+
+    @Test
+    void placeOrderWithExistingProduct_thenOrderExists() throws Exception {
+        // Place an order with one or more existing products. The order is inserted. The productos don't
+        // get updated.
+
+        long count = productService.count();
+
+        productService.save(p1);
+        productService.save(p2);
+
+        assertEquals(count+2, productService.count());
+        assertTrue(productService.findAll().contains(p2));
+        List<Product> l = new ArrayList<>();
+        p2.setName("Other name");
+        l.add(p2);
+
+        Order order = new Order(l, "user@shop.com", LocalDateTime.of(2020,12,6,12,0,0));
+
+        int orderId = orderService.save(order);
+
+        Order fetchOrder = orderService.findById(orderId);
+
+        assertEquals(orderId, fetchOrder.getOrderId());
+        assertEquals(1, fetchOrder.getProducts().size());
+        assertEquals(p2.getProductId(), fetchOrder.getProducts().get(0).getProductId());
+        assertEquals("Mouse", fetchOrder.getProducts().get(0).getName());
+
+    }
+
+    @Test
+    void placeOrderWithProductWithWrongId_thenCreatesNewProductAndNewOrder() throws Exception {
+        long count = productService.count();
+
+        productService.save(p3);
+
+        assertEquals(count+1, productService.count());
+        assertTrue(productService.findAll().contains(p3));
+        List<Product> l = new ArrayList<>();
+        p3.setProductId(Integer.MIN_VALUE);
+        l.add(p3);
+
+        Order order = new Order(l, "user@shop.com", LocalDateTime.of(2020,12,6,12,0,0));
+
+        int orderId = orderService.save(order);
+
+        Order fetchOrder = orderService.findById(orderId);
+
+        assertEquals(orderId, fetchOrder.getOrderId());
+        assertEquals(1, fetchOrder.getProducts().size());
+        assertNotEquals(Integer.MIN_VALUE, fetchOrder.getProducts().get(0).getProductId());
+        assertEquals("Display", fetchOrder.getProducts().get(0).getName());
+
+    }
+
+
 
     @Test
     void placeOrderWithoutProducts_thenThrowsException(){
