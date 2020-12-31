@@ -44,9 +44,7 @@ public class OrderRestController {
     public ResponseEntity getTotalAmount(@PathVariable("orderId") int orderId){
         try{
             Order order = orderService.findById(orderId);
-
             return ResponseEntity.ok(order.calculateTotalAmount());
-
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
